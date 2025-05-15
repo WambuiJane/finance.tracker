@@ -33,6 +33,10 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
+      # Build with Maven (skip tests if needed)
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
       # Run tests
       - name: Run Tests
         run: mvn test
