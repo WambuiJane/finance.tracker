@@ -27,14 +27,12 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      # SonarQube scan
-      - name: SonarQube Scan
-        uses: SonarSource/sonarqube-scan-action@v5
+      # SonarCloud scan
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required for PR decoration
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_PROJECT_KEY: WambuiJane_finance.tracker
-          SONAR_ORGANIZATION: finance-tracker
-
 
       # Build with Maven (skip tests if needed)
       - name: Build with Maven
