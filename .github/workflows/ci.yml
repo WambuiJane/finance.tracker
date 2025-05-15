@@ -28,16 +28,11 @@ jobs:
           cache: 'maven'
 
       # SonarCloud scan
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5
-        with:
-          projectBaseDir: .
-          args: >
-            -Dsonar.projectKey=WambuiJane_finance.tracker
-            -Dsonar.organization=finance-tracker
+      - name: SonarCloud Analysis with Maven
+        run: mvn verify sonar:sonar -Dsonar.host.url=https://sonarcloud.io
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       # Build with Maven (skip tests if needed)
       - name: Build with Maven
